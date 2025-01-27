@@ -1,0 +1,14 @@
+{
+  "name": "simple-speech-to-text",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Tona-Mangobyte/simple-speech-to-text.git",
+  "author": "Tona <tona@mango-byte.com>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "fs": "^0.0.1-security",
+    "node-fetch": "^3.3.2",
+    "openai": "^4.80.1"
+  }
+}
