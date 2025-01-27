@@ -10,9 +10,6 @@ async function transcribeAudio(filename, apiKey, retries = 3, delay = 1000) {
         const openAiClient = new openai.OpenAI({
             apiKey,
             timeout: 900 * 1000, // timeout seconds * ms - API key from environment variables.
-            //project: 'proj_cThpPs4X8ZgpryiZzLuvQi56',
-            //organization: 'org-v7bhOpq8VgkpCMTQXjv0jbOx',
-            // baseURL: 'https://api.openai.com',
         });
 
         // Send the audio file for transcription using the specified model.
