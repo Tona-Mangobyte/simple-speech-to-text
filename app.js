@@ -16,9 +16,6 @@ async function transcribeAudio(filename, apiKey, retries = 3, delay = 1000) {
         const transcription = await openAiClient.audio.transcriptions.create({
             file: fs.createReadStream(filename),
             model: 'whisper-1',
-            language: 'auto',
-            response_format: 'verbose_json'
-            // response_format: "verbose_json",
         });
         console.info(transcription);
         // Return the transcription result.
