@@ -31,7 +31,7 @@ async function transcribeAudio(filename, apiKey) {
 // Immediately invoked function expression (IIFE) to run the transcription process.
 (async () => {
     // Transcribe the specified audio file using the API key from environment variables.
-    const data = await transcribeAudio("audio/simple_ja.mp3", process.env.OPENAI_API_KEY);
+    const data = await transcribeAudio("audio/simple_en.mp3", process.env.OPENAI_API_KEY);
     // Log the transcription result.
     console.log(data);
 })();
