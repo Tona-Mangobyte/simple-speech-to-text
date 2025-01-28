@@ -6,6 +6,7 @@
   "author": "Tona <tona@mango-byte.com>",
   "license": "MIT",
   "dependencies": {
+    "@google-cloud/speech": "^6.7.0",
     "dotenv": "^16.4.7",
     "fs": "^0.0.1-security",
     "openai": "^4.80.1"
