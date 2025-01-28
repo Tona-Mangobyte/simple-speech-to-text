@@ -4,3 +4,4 @@ node_modules
 .env
 app2.js
 audio
+config
