@@ -15,6 +15,7 @@ async function transcribeAudio(filename, apiKey) {
         const transcription = await openAiClient.audio.transcriptions.create({
             file: fs.createReadStream(filename),
             model: 'whisper-1',
+            timestamp_granularities: ['sentence'],
         });
         console.info(transcription);
         // Return the transcription result.
@@ -40,10 +41,11 @@ function processTranscription(transcription) {
 // Immediately invoked function expression (IIFE) to run the transcription process.
 (async () => {
     // Transcribe the specified audio file using the API key from environment variables.
-    const transcription = await transcribeAudio("audio/simple.mp3", process.env.OPENAI_API_KEY);
+    const transcription = await transcribeAudio("audio/simple_en.mp3", process.env.OPENAI_API_KEY);
     if (transcription) {
         const processedData = processTranscription(transcription);
         console.log('Duration:', processedData.duration);
         console.log('Sentences:', processedData.sentences);
+        console.log(transcription);
     }
 })();
