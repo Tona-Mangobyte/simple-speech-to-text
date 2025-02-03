@@ -30,9 +30,8 @@ async function transcribeAudio(filename, apiKey) {
 
 function processTranscription(transcription) {
     return transcription.segments.map((data) => {
-        return { sentence: data.text.trim(),  duration: data.end - data.start };
-    }
-    ).filter(sentence => sentence.length > 0);
+        return { sentence: data.text.trim(),  duration: Math.floor((data.end - data.start) / 60).toString().padStart(2, '0') };
+    });
 }
 
 // Immediately invoked function expression (IIFE) to run the transcription process.
@@ -42,6 +41,5 @@ function processTranscription(transcription) {
     if (transcription) {
         const processedData = processTranscription(transcription);
         console.log(processedData);
-        console.log(transcription);
     }
 })();
