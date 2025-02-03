@@ -30,7 +30,7 @@ async function transcribeAudio(filename, apiKey) {
 
 function processTranscription(transcription) {
     return transcription.segments.map((data) => {
-        return { sentence: data.text.trim(),  duration: Math.floor((data.end - data.start) / 60).toString().padStart(2, '0') };
+        return { sentence: data.text.trim(),  duration: ((data.end - data.start) / 60).toFixed(2) };
     });
 }
 
