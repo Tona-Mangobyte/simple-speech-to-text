@@ -16,7 +16,6 @@ async function transcribeAudio(filename, apiKey) {
             file: fs.createReadStream(filename),
             model: 'whisper-1',
             response_format: 'verbose_json',
-            timestamp_granularities: ['sentence'],
         });
         console.info(transcription);
         // Return the transcription result.
@@ -30,13 +29,10 @@ async function transcribeAudio(filename, apiKey) {
 
 
 function processTranscription(transcription) {
-    const sentences = transcription.text.split('.').map(sentence => sentence.trim()).filter(sentence => sentence.length > 0);
-    const duration = transcription.duration; // Assuming the API provides duration in the response
-
-    return {
-        sentences,
-        duration
-    };
+    return transcription.segments.map((data) => {
+        return { sentence: data.text.trim(),  duration: data.end - data.start };
+    }
+    ).filter(sentence => sentence.length > 0);
 }
 
 // Immediately invoked function expression (IIFE) to run the transcription process.
@@ -45,8 +41,7 @@ function processTranscription(transcription) {
     const transcription = await transcribeAudio("audio/simple_en.mp3", process.env.OPENAI_API_KEY);
     if (transcription) {
         const processedData = processTranscription(transcription);
-        console.log('Duration:', processedData.duration);
-        console.log('Sentences:', processedData.sentences);
+        console.log(processedData);
         console.log(transcription);
     }
 })();
