@@ -1,5 +1,5 @@
 const openai = require('openai');
-const fs = require('fs');
+const fs = require('node:fs');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -40,7 +40,7 @@ function processTranscription(transcription) {
 // Immediately invoked function expression (IIFE) to run the transcription process.
 (async () => {
     // Transcribe the specified audio file using the API key from environment variables.
-    const transcription = await transcribeAudio("simple.mp3", process.env.OPENAI_API_KEY);
+    const transcription = await transcribeAudio("audio/simple.mp3", process.env.OPENAI_API_KEY);
     if (transcription) {
         const processedData = processTranscription(transcription);
         console.log('Duration:', processedData.duration);
