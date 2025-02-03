@@ -26,10 +26,24 @@ async function transcribeAudio(filename, apiKey) {
     }
 }
 
+
+function processTranscription(transcription) {
+    const sentences = transcription.text.split('.').map(sentence => sentence.trim()).filter(sentence => sentence.length > 0);
+    const duration = transcription.duration; // Assuming the API provides duration in the response
+
+    return {
+        sentences,
+        duration
+    };
+}
+
 // Immediately invoked function expression (IIFE) to run the transcription process.
 (async () => {
     // Transcribe the specified audio file using the API key from environment variables.
-    const data = await transcribeAudio("simple.mp3", process.env.OPENAI_API_KEY);
-    // Log the transcription result.
-    console.log(data);
+    const transcription = await transcribeAudio("simple.mp3", process.env.OPENAI_API_KEY);
+    if (transcription) {
+        const processedData = processTranscription(transcription);
+        console.log('Duration:', processedData.duration);
+        console.log('Sentences:', processedData.sentences);
+    }
 })();
